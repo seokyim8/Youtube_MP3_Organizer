@@ -3,22 +3,28 @@ import { StyleSheet, TextInput, View, Button} from 'react-native';
 export default function Add_album_container(props){
   function add_to_list(){
     if(props.entered_name === ''){
-      console.log("Error: Cannot add empty string as the title of an album");
+      console.log("Error: Cannot add empty string as the title of an album.");
       return;
     }
-      props.set_album_list((album_list)=>{
-        return [...album_list, props.entered_name];
-      })
-      console.log(props.album_list);
+    else if(props.entered_name in props.album_name_dictionary){
+      console.log("Error: An album with the given name already exists.")
+      return;
+    }
+    props.set_album_list((album_list)=>{
+      return [...album_list, props.entered_name];
+    })
+    props.album_name_dictionary[props.entered_name] = props.entered_name;
+    console.log(props.album_list);
   }
+
   function set_text(entered_text){
     props.set_entered_name(entered_text)
   }
 
   return (
-      <View style={styles.add_album_container}>
+    <View style={styles.add_album_container}>
       <TextInput style={styles.add_album_box} placeholder='Type new album name' onChangeText={set_text}></TextInput>
-      <Button style={styles.add_album_button} title='Add Album' onPress={add_to_list}></Button>
+      <Button title='Add Album' onPress={add_to_list}></Button>
     </View>
   )
 }
@@ -40,8 +46,5 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         flex: 7,
         marginRight: 10
-      },
-      add_album_button: {
-        flex: 2
       }
 });
