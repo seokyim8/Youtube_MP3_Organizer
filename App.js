@@ -1,6 +1,7 @@
 import { StyleSheet, TextInput, View, Button} from 'react-native';
 import { useState } from 'react';
-import Album from "./components/Add_album_container.js"
+import Add_album_container from "./components/Add_album_container.js"
+import Album_list from "./components/Album_list.js"
 
 export default function App() {
   const [entered_name, set_entered_name] = useState('');
@@ -8,11 +9,9 @@ export default function App() {
 
   return (
     <View style={styles.app}>
-      <Album set_album_list ={set_album_list} album_list = {album_list} 
+      <Add_album_container set_album_list ={set_album_list} album_list = {album_list} 
       entered_name={entered_name} set_entered_name={set_entered_name} />
-      <View>
-
-      </View>
+      <Album_list album_list={album_list} />
     </View>
   );
 }

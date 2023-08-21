@@ -1,7 +1,17 @@
-import {StyleSheet, View, Text, Button} from 'react-native';
+import {StyleSheet, View, Text, Button, FlatList} from 'react-native';
 
-export default function Album_list(){
+export default function Album_list(props){
     return (
-        <View></View>
+        <FlatList>
+            {props.album_list.map((title)=>(
+                <View key={title}>
+                    <Text>{title}</Text>
+                </View>
+            ))}
+        </FlatList>
     )
 }
+
+const styles = StyleSheet.create({
+
+});
