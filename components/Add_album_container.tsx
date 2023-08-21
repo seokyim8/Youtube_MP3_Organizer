@@ -6,7 +6,8 @@ type Prop = {
   set_entered_name: Function,
   album_list: Array<string>,
   set_album_list: Function,
-  album_name_dictionary: Object
+  album_name_dictionary: Object,
+  set_album_name_dictionary: Function
 }
 
 export default function Add_album_container(props: Prop): ReactElement {
@@ -19,14 +20,22 @@ export default function Add_album_container(props: Prop): ReactElement {
       console.log("Error: An album with the given name already exists.")
       return;
     }
-    props.set_album_list((album_list)=>{
+    
+    props.set_album_list((album_list: Array<string>): Array<string> =>{
       return [...album_list, props.entered_name];
-    })
-    props.album_name_dictionary[props.entered_name] = props.entered_name;
+    });
+    
+    props.set_album_name_dictionary((dictionary: Object): Object =>{
+      dictionary[props.entered_name] = props.entered_name;
+      return dictionary;
+    });
+
+    //debugging
     console.log(props.album_list);
+    //
   }
 
-  function set_text(entered_text){
+  function set_text(entered_text: string): void {
     props.set_entered_name(entered_text)
   }
 
