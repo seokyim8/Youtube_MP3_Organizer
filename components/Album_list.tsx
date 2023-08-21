@@ -1,6 +1,11 @@
 import {StyleSheet, View, Text, Button, FlatList} from 'react-native';
+import { ReactElement } from 'react';
 
-export default function Album_list(props){
+type Prop = {
+    album_list: Array<string>
+  }
+
+export default function Album_list(props: Prop): ReactElement{
     return (
         <FlatList
         data={props.album_list}

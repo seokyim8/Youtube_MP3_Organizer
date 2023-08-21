@@ -1,6 +1,15 @@
 import { StyleSheet, TextInput, View, Button} from 'react-native';
+import { ReactElement } from 'react';
 
-export default function Add_album_container(props){
+type Prop = {
+  entered_name: string,
+  set_entered_name: Function,
+  album_list: Array<string>,
+  set_album_list: Function,
+  album_name_dictionary: Object
+}
+
+export default function Add_album_container(props: Prop): ReactElement {
   function add_to_list(){
     if(props.entered_name === ''){
       console.log("Error: Cannot add empty string as the title of an album.");
