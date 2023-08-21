@@ -1,12 +1,22 @@
 import { StyleSheet, TextInput, View, Button} from 'react-native';
 
 export default function Add_album_container(props){
-    return (
-        <View style={styles.add_album_container}>
-        <TextInput style={styles.add_album_box} placeholder='Type new album name'></TextInput>
-        <Button style={styles.add_album_button} title='Add Album'></Button>
-      </View>
-    )
+  function add_to_list(){
+      props.set_album_list((album_list)=>{
+        return [...album_list, props.entered_name];
+      })
+      console.log(props.album_list);
+  }
+  function set_text(entered_text){
+    props.set_entered_name(entered_text)
+  }
+
+  return (
+      <View style={styles.add_album_container}>
+      <TextInput style={styles.add_album_box} placeholder='Type new album name' onChangeText={set_text}></TextInput>
+      <Button style={styles.add_album_button} title='Add Album' onPress={add_to_list}></Button>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
