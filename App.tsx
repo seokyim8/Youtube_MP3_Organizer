@@ -4,6 +4,7 @@ import Add_album_container from "./components/Add_album_container"
 import Album_list from "./components/Album_list"
 
 export default function App() {
+  //States
   const [entered_name, set_entered_name] = useState<string>('');
   const [album_list, set_album_list] = useState<Array<string>>([]);//TODO: Array value has to change later
   const [album_name_dictionary, set_album_name_dictionary] = useState<Object>({});
