@@ -11,12 +11,12 @@ export default function Album_list(props: Prop): ReactElement{
         data={props.album_list}
         renderItem={(item_data)=>{
             return (
-                <View>
+                <View style={styles.album}>
                     <Text>{item_data.item}</Text>
                 </View>
             )
         }} 
-        style={styles.album_list} />
+        style={styles.album_list} />    
     )
 }
 
@@ -24,6 +24,13 @@ const styles = StyleSheet.create({
     album_list: {
         margin: 2,
         padding: 2,
-        borderColor: "black"
+        borderColor: "black",
+        borderWidth: 2
+    },
+    album: {
+        margin: 2,
+        padding: 2,
+        borderColor: "black",
+        borderWidth: 2
     }
 });

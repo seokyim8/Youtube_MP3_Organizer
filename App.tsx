@@ -13,13 +13,14 @@ export default function App() {
       <Add_album_container set_album_list ={set_album_list} album_list = {album_list} 
       entered_name={entered_name} set_entered_name={set_entered_name} 
       album_name_dictionary={album_name_dictionary} set_album_name_dictionary={set_album_name_dictionary}/>
-      <Album_list album_list={album_list} />
+      <Album_list album_list={album_list}/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   app: {
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    flex: 1
   }
 });
