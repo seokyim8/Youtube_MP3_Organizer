@@ -1,4 +1,4 @@
-import {StyleSheet, View, Text, Button, FlatList} from 'react-native';
+import {StyleSheet, View, Text, Button, FlatList, Pressable} from 'react-native';
 import { ReactElement } from 'react';
 
 type Prop = {
@@ -6,14 +6,26 @@ type Prop = {
   }
 
 export default function Album_list(props: Prop): ReactElement{
+    function onPressFunction(){
+        //TODO: Switches Page to Album Specific page
+    }
+
     return (
         <FlatList
         data={props.album_list}
         renderItem={(item_data)=>{
             return (
-                <View style={styles.album}>
+                <Pressable style={({pressed})=>{
+                    if(pressed){
+                        return styles.pressed;
+                    }
+                    else{
+                        return styles.album;
+                    }
+                }}
+                onPress={onPressFunction}>
                     <Text style={styles.album_name}>{item_data.item}</Text>
-                </View>
+                </Pressable>
             )
         }} 
         style={styles.album_list} />    
@@ -38,5 +50,13 @@ const styles = StyleSheet.create({
     album_name: {
         color: "#33160b",
         fontFamily: "Menlo"
+    },
+    pressed: {
+        margin: 7,
+        padding: 7,
+        borderColor: "#fae3c5",
+        borderWidth: 2,
+        borderRadius: 6,
+        backgroundColor: "#8f7518"
     }
 });
