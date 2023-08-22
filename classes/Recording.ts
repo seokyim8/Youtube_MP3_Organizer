@@ -1,4 +1,4 @@
-class Recording{
+export class Recording{
     name: string;
     URL: string;
     path: string;

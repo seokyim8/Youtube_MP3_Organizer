@@ -1,3 +1,5 @@
+import { Recording } from "./Recording"
+
 export class Album{
     name: string;
     recordings: Array<Recording>;

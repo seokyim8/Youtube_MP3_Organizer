@@ -1,6 +1,9 @@
 import {StyleSheet, View, Text, Button, FlatList} from "react-native"
 import { ReactElement, useState } from "react"
 import Custom_button from "./Custom_button";
+import { Album } from "../classes/Album"
+import { Recording } from "../classes/Recording"
+
 
 type Prop = {
     navigation: any,
@@ -8,14 +11,13 @@ type Prop = {
 }
 
 export default function Album_screen(props: Prop): ReactElement {
-    let name: string;
-    const mp3s = useState<Array<string>>([]);
-
     function add_recording(): void {
-
+        //TODO: Fill this part in
+        //let recording = new Recording();
     }
     function delete_album(): void {
-
+        //TODO: Fill this part in
+        //IMPORTANT: I NEED TO RETRIEVE REFERENCE TO THE DICTIONARY AND THE LIST OF ALBUMS FROM THE CALLER!!
     }
 
     return (
