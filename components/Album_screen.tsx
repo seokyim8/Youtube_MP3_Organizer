@@ -5,7 +5,7 @@ type Prop = {
     navigation: any
 }
 
-export default function Album(props: Prop): ReactElement {
+export default function Album_screen(props: Prop): ReactElement {
     let name: string;
     const mp3s = useState<Array<string>>([]);
 

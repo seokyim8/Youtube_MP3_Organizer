@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Main_screen from './components/Main_screen';
-import Album from './components/Album';
+import Album_screen from './components/Album_screen';
 
 export default function App() {
   //States
@@ -18,7 +18,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen options={{headerShown: false}} name="Main_screen" component={Main_screen}/>
-        <Stack.Screen options={{headerShown: false}} name="Album_screen" component={Album}/>
+        <Stack.Screen options={{headerShown: false}} name="Album_screen" component={Album_screen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

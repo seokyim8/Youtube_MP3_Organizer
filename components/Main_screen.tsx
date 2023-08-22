@@ -7,6 +7,21 @@ type Prop = {
     navigation: any
 }
 
+type Recording = {
+    name: string,
+    URL: string,
+    path: string
+}
+
+type Album = {
+    name: string,
+    recordings: Array<Recording>
+}
+
+type Albums = {
+    [key: string]: Album
+}
+
 export default function Main_screen(prop: Prop):ReactElement {
   //States
   const [entered_name, set_entered_name] = useState<string>('');
