@@ -1,5 +1,6 @@
 import {StyleSheet, View, Text, Button, FlatList} from "react-native"
 import { ReactElement, useState } from "react"
+import Custom_button from "./Custom_button";
 
 type Prop = {
     navigation: any,
@@ -10,13 +11,22 @@ export default function Album_screen(props: Prop): ReactElement {
     let name: string;
     const mp3s = useState<Array<string>>([]);
 
+    function add_recording(): void {
+
+    }
+    function delete_album(): void {
+
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.title_container}>
                 <Text style={styles.title}>{props.route.params.album.name}</Text>
             </View>
             <View style={styles.top_bar}>
-                <Button title="Back To Albums" onPress={()=>props.navigation.navigate("Main_screen")}></Button>
+                <Custom_button text="Back" onPress={()=>props.navigation.navigate("Main_screen")} />
+                <Custom_button text="Add Recording" onPress={add_recording} />
+                <Custom_button text="Delete" onPress={delete_album} />
             </View>
             <FlatList data={props.route.params.album.recordings} renderItem={(item_data)=>{
                 return (
@@ -41,7 +51,8 @@ const styles = StyleSheet.create({
         padding: 5,
         flexDirection: "row",
         borderBottomWidth: 0.5,
-        borderBottomColor: "gray"
+        borderBottomColor: "gray",
+        justifyContent: "space-between"
     },
     title: {
         fontFamily: "Menlo",

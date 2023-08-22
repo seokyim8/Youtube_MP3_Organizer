@@ -1,6 +1,7 @@
-import { StyleSheet, TextInput, View, Button} from 'react-native';
+import { StyleSheet, TextInput, View, Button, Alert} from 'react-native';
 import { ReactElement } from 'react';
 import { Album } from "../classes/Album"
+import Custom_button from './Custom_button';
 
 type Albums = {
   [key: string]: Album
@@ -18,11 +19,11 @@ type Prop = {
 export default function Add_album_container(props: Prop): ReactElement {
   function add_to_list(){
     if(props.entered_name === ''){
-      console.log("Error: Cannot add empty string as the title of an album.");
+      Alert.alert("Error: Empty Title", "Cannot have an empty title for an album.");
       return;
     }
     else if(props.entered_name in props.album_name_dictionary){
-      console.log("Error: An album with the given name already exists.")
+      Alert.alert("Error: Duplicate Name", "An album with the given name already exists.");
       return;
     }
 
@@ -46,7 +47,7 @@ export default function Add_album_container(props: Prop): ReactElement {
   return (
     <View style={styles.add_album_container}>
       <TextInput style={styles.add_album_box} placeholder='Type new album name' onChangeText={set_text}></TextInput>
-      <Button title='Add Album' onPress={add_to_list}></Button>
+      <Custom_button text='Add Album' onPress={add_to_list} />
     </View>
   )
 }
@@ -70,8 +71,5 @@ const styles = StyleSheet.create({
     flex: 7,
     marginRight: 10,
     borderRadius: 6
-  },
-  add_album_button: {
-    //TODO
   }
 });
