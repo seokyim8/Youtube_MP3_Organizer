@@ -1,16 +1,13 @@
 import {StyleSheet, View, Text, Button, FlatList, Pressable} from 'react-native';
 import { ReactElement } from 'react';
+import { Album } from '../classes/Album'
 
 type Prop = {
-    album_list: Array<string>,
+    album_list: Array<Album>,
     navigation: any
 }
 
 export default function Album_list(props: Prop): ReactElement{
-    function onPressFunction(){
-        props.navigation.navigate('Album_screen');
-    }
-
     return (
         <FlatList
         data={props.album_list}
@@ -24,8 +21,8 @@ export default function Album_list(props: Prop): ReactElement{
                         return styles.album;
                     }
                 }}
-                onPress={onPressFunction}>
-                    <Text style={styles.album_name}>{item_data.item}</Text>
+                onPress={()=>props.navigation.navigate('Album_screen')}>
+                    <Text style={styles.album_name}>{item_data.item.name}</Text>
                 </Pressable>
             )
         }} 

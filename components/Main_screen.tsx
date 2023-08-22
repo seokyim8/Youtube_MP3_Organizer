@@ -2,20 +2,10 @@ import { StyleSheet, TextInput, View, Button} from 'react-native';
 import { useState, ReactElement } from 'react';
 import Add_album_container from "./Add_album_container"
 import Album_list from "./Album_list"
+import { Album } from "../classes/Album"
 
 type Prop = {
     navigation: any
-}
-
-type Recording = {
-    name: string,
-    URL: string,
-    path: string
-}
-
-type Album = {
-    name: string,
-    recordings: Array<Recording>
 }
 
 type Albums = {
@@ -25,8 +15,8 @@ type Albums = {
 export default function Main_screen(prop: Prop):ReactElement {
   //States
   const [entered_name, set_entered_name] = useState<string>('');
-  const [album_list, set_album_list] = useState<Array<string>>([]);//TODO: Array value has to change later
-  const [album_name_dictionary, set_album_name_dictionary] = useState<Object>({});
+  const [album_list, set_album_list] = useState<Array<Album>>([]);//TODO: Array value has to change later
+  const [album_name_dictionary, set_album_name_dictionary] = useState<Albums>({});
 
   return (
     <View style={styles.app}>

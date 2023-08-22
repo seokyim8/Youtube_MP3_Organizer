@@ -1,12 +1,17 @@
 import { StyleSheet, TextInput, View, Button} from 'react-native';
 import { ReactElement } from 'react';
+import { Album } from "../classes/Album"
+
+type Albums = {
+  [key: string]: Album
+}
 
 type Prop = {
   entered_name: string,
   set_entered_name: Function,
-  album_list: Array<string>,
+  album_list: Array<Album>,
   set_album_list: Function,
-  album_name_dictionary: Object,
+  album_name_dictionary: Albums,
   set_album_name_dictionary: Function
 }
 
@@ -21,12 +26,15 @@ export default function Add_album_container(props: Prop): ReactElement {
       return;
     }
 
-    props.set_album_list((album_list: Array<string>): Array<string> =>{
-      return [...album_list, props.entered_name];
+    //create a new instance of album and add it to list and dictionary
+    let temp = new Album(props.entered_name, []);
+
+    props.set_album_list((album_list: Array<Album>): Array<Album> =>{
+      return [...album_list, temp];
     });
     
-    props.set_album_name_dictionary((dictionary: Object): Object =>{
-      dictionary[props.entered_name] = props.entered_name;
+    props.set_album_name_dictionary((dictionary: Albums): Albums =>{
+      dictionary[props.entered_name] = temp;
       return dictionary;
     });
   }
