@@ -17,7 +17,7 @@ export default function Album_list(props: Prop): ReactElement{
             )
         }} 
         style={styles.album_list} />    
-    )
+    );
 }
 
 const styles = StyleSheet.create({

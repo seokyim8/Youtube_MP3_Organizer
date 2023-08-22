@@ -32,7 +32,7 @@ export default function Add_album_container(props: Prop): ReactElement {
   }
 
   function set_text(entered_text: string): void {
-    props.set_entered_name(entered_text)
+    props.set_entered_name(entered_text);
   }
 
   return (
