@@ -1,32 +1,19 @@
-import {StyleSheet, View, Text, Pressable} from "react-native"
+import {StyleSheet, View, Text, Button} from "react-native"
 import { ReactElement, useState } from "react"
 
 type Prop = {
-
+    navigation: any
 }
 
-export default function Album(prop: Prop): ReactElement {
+export default function Album(props: Prop): ReactElement {
     let name: string;
     const mp3s = useState<Array<string>>([]);
 
     return (
-        <Pressable style={styles.album}>
-            
-        </Pressable>
+        <Button title="GO BACK" onPress={()=>props.navigation.navigate("Main_screen")}></Button>
     );
 }
 
 const styles = StyleSheet.create({
-    album: {
-        margin: 7,
-        padding: 7,
-        borderColor: "#fae3c5",
-        borderWidth: 2,
-        borderRadius: 6,
-        backgroundColor: "#fae3c5"
-    },
-    album_name: {
-        color: "#33160b",
-        fontFamily: "Menlo"
-    }
+
 });

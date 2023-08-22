@@ -2,12 +2,13 @@ import {StyleSheet, View, Text, Button, FlatList, Pressable} from 'react-native'
 import { ReactElement } from 'react';
 
 type Prop = {
-    album_list: Array<string>
-  }
+    album_list: Array<string>,
+    navigation: any
+}
 
 export default function Album_list(props: Prop): ReactElement{
     function onPressFunction(){
-        //TODO: Switches Page to Album Specific page
+        props.navigation.navigate('Album_screen');
     }
 
     return (

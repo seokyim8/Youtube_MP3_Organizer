@@ -1,7 +1,10 @@
 import { StyleSheet, TextInput, View, Button} from 'react-native';
 import { useState } from 'react';
-import Add_album_container from "./components/Add_album_container"
-import Album_list from "./components/Album_list"
+import {NavigationContainer} from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import Main_screen from './components/Main_screen';
+import Album from './components/Album';
 
 export default function App() {
   //States
@@ -9,13 +12,15 @@ export default function App() {
   const [album_list, set_album_list] = useState<Array<string>>([]);//TODO: Array value has to change later
   const [album_name_dictionary, set_album_name_dictionary] = useState<Object>({});
 
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={styles.app}>
-      <Add_album_container set_album_list ={set_album_list} album_list = {album_list} 
-      entered_name={entered_name} set_entered_name={set_entered_name} 
-      album_name_dictionary={album_name_dictionary} set_album_name_dictionary={set_album_name_dictionary}/>
-      <Album_list album_list={album_list}/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen options={{headerShown: false}} name="Main_screen" component={Main_screen}/>
+        <Stack.Screen options={{headerShown: false}} name="Album_screen" component={Album}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
