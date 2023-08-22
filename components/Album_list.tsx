@@ -21,7 +21,7 @@ export default function Album_list(props: Prop): ReactElement{
                         return styles.album;
                     }
                 }}
-                onPress={()=>props.navigation.navigate('Album_screen')}>
+                onPress={()=>props.navigation.navigate('Album_screen', {album: item_data.item})}>
                     <Text style={styles.album_name}>{item_data.item.name}</Text>
                 </Pressable>
             )

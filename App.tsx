@@ -7,11 +7,6 @@ import Main_screen from './components/Main_screen';
 import Album_screen from './components/Album_screen';
 
 export default function App() {
-  //States
-  const [entered_name, set_entered_name] = useState<string>('');
-  const [album_list, set_album_list] = useState<Array<string>>([]);//TODO: Array value has to change later
-  const [album_name_dictionary, set_album_name_dictionary] = useState<Object>({});
-
   const Stack = createNativeStackNavigator();
 
   return (

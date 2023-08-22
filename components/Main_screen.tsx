@@ -15,7 +15,7 @@ type Albums = {
 export default function Main_screen(prop: Prop):ReactElement {
   //States
   const [entered_name, set_entered_name] = useState<string>('');
-  const [album_list, set_album_list] = useState<Array<Album>>([]);//TODO: Array value has to change later
+  const [album_list, set_album_list] = useState<Array<Album>>([]);
   const [album_name_dictionary, set_album_name_dictionary] = useState<Albums>({});
 
   return (
