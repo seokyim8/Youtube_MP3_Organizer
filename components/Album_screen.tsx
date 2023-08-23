@@ -19,11 +19,9 @@ export default function Album_screen(props: Prop): ReactElement {
     function add_recording(): void {
         let recording = new Recording("sample1", "URL","Path");
         DeviceEventEmitter.emit("add_recording", {album: props.route.params.album, recording: recording});
-        DeviceEventEmitter.removeAllListeners("add_recording");
     }
     function delete_album(): void {
         DeviceEventEmitter.emit("delete_album", {album: props.route.params.album});
-        DeviceEventEmitter.removeAllListeners("delete_album");
         props.navigation.navigate("Main_screen");
     }
 
