@@ -3,6 +3,7 @@ import { useState, ReactElement } from 'react';
 import Add_album_container from "./Add_album_container"
 import Album_list from "./Album_list"
 import { Album } from "../classes/Album"
+import { DeviceEventEmitter } from 'react-native';
 
 type Prop = {
     navigation: any
@@ -17,6 +18,18 @@ export default function Main_screen(prop: Prop):ReactElement {
   const [entered_name, set_entered_name] = useState<string>('');
   const [album_list, set_album_list] = useState<Array<Album>>([]);
   const [album_name_dictionary, set_album_name_dictionary] = useState<Albums>({});
+
+  DeviceEventEmitter.addListener("delete_album", (event_data)=>delete_album(event_data.album));
+
+  function delete_album(event_data: Album){
+    set_album_list((prev: Array<Album>): Array<Album> =>{
+      return prev.filter((elem)=> elem.name !== event_data.name);
+    });
+    set_album_name_dictionary((prev: Albums): Albums =>{
+      delete prev[event_data.name];
+      return prev;
+    });
+  }
 
   return (
     <View style={styles.app}>

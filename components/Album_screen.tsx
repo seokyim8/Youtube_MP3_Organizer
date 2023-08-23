@@ -1,13 +1,18 @@
-import {StyleSheet, View, Text, Button, FlatList} from "react-native"
+import { StyleSheet, View, Text, Button, FlatList } from "react-native"
 import { ReactElement, useState } from "react"
 import Custom_button from "./Custom_button";
 import { Album } from "../classes/Album"
 import { Recording } from "../classes/Recording"
+import { DeviceEventEmitter } from "react-native";
 
 
 type Prop = {
     navigation: any,
     route: any
+}
+
+type Albums = {
+    [key: string]: Album
 }
 
 export default function Album_screen(props: Prop): ReactElement {
@@ -16,8 +21,9 @@ export default function Album_screen(props: Prop): ReactElement {
         //let recording = new Recording();
     }
     function delete_album(): void {
-        //TODO: Fill this part in
-        //IMPORTANT: I NEED TO RETRIEVE REFERENCE TO THE DICTIONARY AND THE LIST OF ALBUMS FROM THE CALLER!!
+        DeviceEventEmitter.emit("delete_album", {album: props.route.params.album});
+        DeviceEventEmitter.removeAllListeners("delete_album");
+        props.navigation.navigate("Main_screen");
     }
 
     return (

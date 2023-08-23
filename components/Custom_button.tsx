@@ -3,7 +3,8 @@ import { ReactElement } from 'react'
 
 type Prop = {
     text: string,
-    onPress: any
+    onPress?: any,
+    onPressOut?: any
 }
 
 export default function Custom_button(props: Prop): ReactElement {
@@ -15,7 +16,7 @@ export default function Custom_button(props: Prop): ReactElement {
             else{
                 return styles.button;
             }
-        }} onPress={props.onPress}> 
+        }} onPress={props.onPress} onPressOut={props.onPressOut}> 
             <Text style={styles.button_text}>{props.text}</Text>
         </Pressable>
     );//HOW DID props.onPress WORK???? WHAT?
