@@ -17,8 +17,9 @@ type Albums = {
 
 export default function Album_screen(props: Prop): ReactElement {
     function add_recording(): void {
-        //TODO: Fill this part in
-        //let recording = new Recording();
+        let recording = new Recording("sample1", "URL","Path");
+        DeviceEventEmitter.emit("add_recording", {album: props.route.params.album, recording: recording});
+        DeviceEventEmitter.removeAllListeners("add_recording");
     }
     function delete_album(): void {
         DeviceEventEmitter.emit("delete_album", {album: props.route.params.album});
@@ -38,7 +39,7 @@ export default function Album_screen(props: Prop): ReactElement {
             </View>
             <FlatList data={props.route.params.album.recordings} renderItem={(item_data)=>{
                 return (
-                    <View>
+                    <View style={styles.recording}>
                         <Text>{item_data.item.name}</Text>
                     </View>
                 );
@@ -71,5 +72,9 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         justifyContent: "center",
         flexDirection: "row"
+    },
+    recording: {
+        margin: 5,
+        padding: 5
     }
 });
