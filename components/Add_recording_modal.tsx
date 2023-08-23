@@ -16,7 +16,7 @@ type Prop = {
 export default function Add_recording_modal(props: Prop): ReactElement {
     return (
         <View style={styles.container}>
-            <Modal visible={props.modal_visible} style={styles.widget_container}>
+            <Modal animationType="slide" visible={props.modal_visible} style={styles.widget_container}>
                 <TextInput style={styles.add_box} placeholder='Recording name' 
                 onChangeText={(text)=>props.set_entered_name(()=>text)}></TextInput>
                 <TextInput style={styles.add_box} placeholder='Youtube URL' onChangeText={(text)=>props.set_entered_url(()=>text)}></TextInput>
@@ -35,9 +35,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: "column",
         justifyContent: "center",
-        alignContent: "center",
-        margin: 10,
-        padding: 10
+        alignContent: "center"
     },
     widget_container: {
         margin: 5,
