@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Button, FlatList } from "react-native"
+import { StyleSheet, View, Text, Button, FlatList, Alert } from "react-native"
 import { ReactElement, useState } from "react"
 import Custom_button from "./Custom_button";
 import { Album } from "../classes/Album"
@@ -23,6 +23,10 @@ export default function Album_screen(props: Prop): ReactElement {
     const [entered_url, set_entered_url] = useState('');
 
     function add_recording(): void {
+        if(entered_name === '' || entered_url === ''){
+            Alert.alert("Error: Empty Fields", "The recording name and URL cannot be empty.");
+            return;
+        }
         let recording = new Recording(entered_name, entered_url,"");
         DeviceEventEmitter.emit("add_recording", {album: props.route.params.album, recording: recording});
         set_need_refresh((prev)=>!prev);
