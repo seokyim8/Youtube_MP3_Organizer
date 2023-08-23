@@ -16,9 +16,12 @@ type Albums = {
 }
 
 export default function Album_screen(props: Prop): ReactElement {
+    const [need_refresh, set_need_refresh] = useState(false);
+
     function add_recording(): void {
         let recording = new Recording("sample1", "URL","Path");
         DeviceEventEmitter.emit("add_recording", {album: props.route.params.album, recording: recording});
+        set_need_refresh((prev)=>!prev);
     }
     function delete_album(): void {
         DeviceEventEmitter.emit("delete_album", {album: props.route.params.album});
@@ -35,7 +38,8 @@ export default function Album_screen(props: Prop): ReactElement {
                 <Custom_button text="Add Recording" onPress={add_recording} />
                 <Custom_button text="Delete" onPress={delete_album} />
             </View>
-            <FlatList data={props.route.params.album.recordings} renderItem={(item_data)=>{
+            <FlatList data={props.route.params.album.recordings} extraData={need_refresh}
+            renderItem={(item_data)=>{
                 return (
                     <View style={styles.recording}>
                         <Text>{item_data.item.name}</Text>
