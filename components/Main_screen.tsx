@@ -22,6 +22,9 @@ export default function Main_screen(prop: Prop):ReactElement {
   DeviceEventEmitter.addListener("delete_album", (event_data)=>delete_album(event_data.album));
 
   function delete_album(event_data: Album){
+    //debugging: DELETE ALBUM IS CALLED MULTIPLE TIMES??
+    console.log("HERE");
+    //
     set_album_list((prev: Array<Album>): Array<Album> =>{
       return prev.filter((elem)=> elem.name !== event_data.name);
     });
