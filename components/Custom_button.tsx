@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, Pressable } from 'react-native'
 import { ReactElement } from 'react'
 
 type Prop = {
-    text: string,
+    text?: string,
     onPress?: any,
     onPressOut?: any
 }

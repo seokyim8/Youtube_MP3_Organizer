@@ -56,8 +56,10 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
         maxHeight: 30,
+        padding: 3,
         flex: 3,
         borderWidth: 0.5,
-        borderColor: "gray"
+        borderColor: "gray",
+        borderRadius: 5
     }
 });

@@ -2,9 +2,10 @@ import { StyleSheet, View, Text, Button, FlatList, Alert } from "react-native"
 import { ReactElement, useState } from "react"
 import Custom_button from "./Custom_button";
 import { Album } from "../classes/Album"
-import { Recording } from "../classes/Recording"
+import { Recording as Recording_class } from "../classes/Recording"
 import { DeviceEventEmitter } from "react-native";
 import Add_recording_modal from "./Add_recording_modal";
+import Recording from "./Recording"
 
 
 type Prop = {
@@ -17,6 +18,7 @@ type Albums = {
 }
 
 export default function Album_screen(props: Prop): ReactElement {
+    //States
     const [need_refresh, set_need_refresh] = useState(false);
     const [modal_visible, set_modal_visible] = useState(false);
     const [entered_name, set_entered_name] = useState('');
@@ -27,7 +29,7 @@ export default function Album_screen(props: Prop): ReactElement {
             Alert.alert("Error: Empty Fields", "The recording name and URL cannot be empty.");
             return;
         }
-        let recording = new Recording(entered_name, entered_url,"");
+        let recording = new Recording_class(entered_name, entered_url,"");
         DeviceEventEmitter.emit("add_recording", {album: props.route.params.album, recording: recording});
         set_need_refresh((prev)=>!prev);
         set_modal_visible(()=>false);
@@ -55,9 +57,7 @@ export default function Album_screen(props: Prop): ReactElement {
             <FlatList data={props.route.params.album.recordings} extraData={need_refresh}
             renderItem={(item_data)=>{
                 return (
-                    <View style={styles.recording}>
-                        <Text>{item_data.item.name}</Text>
-                    </View>
+                    <Recording recording={item_data.item}/>
                 );
             }}></FlatList>
         </View>
@@ -88,9 +88,5 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         justifyContent: "center",
         flexDirection: "row"
-    },
-    recording: {
-        margin: 5,
-        padding: 5
     }
 });
