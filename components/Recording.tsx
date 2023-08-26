@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text } from 'react-native'
-import { useState, useEffect, ReactElement } from 'react'
+import { useState, useEffect, ReactElement, useRef } from 'react'
 import Custom_button from './Custom_button'
 import { Recording as recording } from "../classes/Recording"
 import { Audio } from 'expo-av';
@@ -10,28 +10,40 @@ type Prop = {
 
 export default function Recording(props: Prop): ReactElement {
     const [is_playing, set_is_playing] = useState(false);
-    const [sound, setSound] = useState<any>();
+    const sound = useRef(new Audio.Sound());
 
     async function playSound() {
+        if(is_playing){
+            console.log("Pausing sound");
+            sound.current.pauseAsync();
+            set_is_playing((prev)=>!prev);
+        }
+        else{
+            console.log('Playing Sound');
+            await sound.current.playAsync();
+            set_is_playing((prev)=>!prev);
+        }
+    }
+
+    async function load_audio(){
         console.log('Loading Sound');
         await Audio.setAudioModeAsync({playsInSilentModeIOS: true});
         console.log("Audio mode set");
-        const sound = new Audio.Sound();
-        await sound.loadAsync({
-            uri: "https://sample-music.netlify.app/death%20bed.mp3"
-        },
-        {shouldPlay: true});
-        console.log('Playing Sound');
-        await sound.playAsync();
+        await sound.current.loadAsync({
+            uri: "http://localhost:3000/music1.mp3"
+        });
     }
 
     useEffect(() => {
-        // return sound
-        //   ? () => {
-        //       console.log('Unloading Sound');
-        //       sound.unloadAsync();
-        //     }
-        //   : undefined;
+        //load audio 
+        load_audio();
+
+        return sound
+          ? () => {
+              console.log('Unloading Sound');
+              sound.current.unloadAsync();
+            }
+          : undefined;
       }, []);
 
     return (
