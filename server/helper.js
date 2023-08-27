@@ -14,8 +14,8 @@ async function add_recording(url){
     url: 'https://youtube-mp3-download1.p.rapidapi.com/dl',
     params: {id: id},
     headers: {
-        'X-RapidAPI-Key': '72689dbd78mshb0d6110da1ae175p17d7e2jsne9012ccdeb58',
-        'X-RapidAPI-Host': 'youtube-mp3-download1.p.rapidapi.com'
+        'X-RapidAPI-Key': '7',
+        'X-RapidAPI-Host': ''
     }
     };
     return await request_api(options);
