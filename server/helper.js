@@ -4,6 +4,7 @@ const webdriver = require("selenium-webdriver");
 const axios = require('axios');
 const fs = require('fs');
 const dir = __dirname + '/audio_files'; //PLACE FOR DOWNLOAD
+const headers = require('../api_key');
 
 module.exports = add_recording;
 
@@ -13,10 +14,7 @@ async function add_recording(url){
     method: 'GET',
     url: 'https://youtube-mp3-download1.p.rapidapi.com/dl',
     params: {id: id},
-    headers: {
-        'X-RapidAPI-Key': '7',
-        'X-RapidAPI-Host': ''
-    }
+    headers: headers
     };
     return await request_api(options);
 }
@@ -86,7 +84,7 @@ async function download_file(link) {
             return "FAIL";
         }
         else{
-            return "SUCCESS";
+            return {code: "SUCCESS", url: dir};
         }
     }
 };
