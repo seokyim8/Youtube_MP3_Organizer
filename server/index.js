@@ -16,9 +16,12 @@ app.get('/music1.mp3', (req, res)=>{
     res.sendFile("./music1.mp3");
 });
 
-app.post('/add_recording', urlencodedParser, (req, res)=>{
+app.post('/add_recording', urlencodedParser, async (req, res)=>{
+    // POST request format:
+    // curl -X POST http://localhost:3000/add_recording -d url="https://www.youtube.com/watch?v=RthqM7grWl0"
+
     try{
-        let return_val = add_recording(req.body.url);
+        let return_val = await add_recording(req.body.url);
         if(return_val === "FAIL"){
             res.send({code: "FAIL"});
         }

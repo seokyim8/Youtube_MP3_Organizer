@@ -3,6 +3,7 @@ let chromeDriver = require('selenium-webdriver/chrome');
 const webdriver = require("selenium-webdriver");
 const axios = require('axios');
 const fs = require('fs');
+const path = require('path');
 const dir = __dirname + '/audio_files'; //PLACE FOR DOWNLOAD
 const headers = require('../api_key');
 
@@ -35,7 +36,7 @@ async function request_api(options){
             return "FAIL";
         }
         else{
-            return await download_file(response["data"]["link"]);
+            return await download_file(response["data"]["link"], options.params.id);
         }
     } catch (e) {
         console.error("Error: " + e);
@@ -43,7 +44,12 @@ async function request_api(options){
     }
 }
 
-async function download_file(link) {
+async function download_file(link, id) {
+    let song_name = path.join(dir, id+".mp3");
+    if(fs.existsSync(song_name)){
+        return {code: "SUCCESS", url: song_name};
+    }
+
     let options = new chromeDriver.Options();
     options.setUserPreferences({
         "download.default_directory": dir
@@ -84,7 +90,22 @@ async function download_file(link) {
             return "FAIL";
         }
         else{
-            return {code: "SUCCESS", url: dir};
+            //order files in audio_files and get most recent one
+            const files = fs.readdirSync(dir).filter(file=>fs.lstatSync(path.join(dir,file)).isFile())
+            .map(file => path.join(dir,file))
+            .sort((a,b) => fs.lstatSync(b).mtime.getTime() - fs.lstatSync(a).mtime.getTime());
+            const recent = (files.length === 0 ? undefined: files[0]);
+            //debugging
+            console.log(recent);
+            //
+            fs.rename(recent, path.join(dir,id+".mp3"), (err)=>{
+                if(err){
+                    console.log("ERROR: modifiying file name unsuccessful");
+                    console.log(err);
+                }
+            });
+
+            return {code: "SUCCESS", url: path.join(dir, id, ".mp3")};
         }
     }
 };
